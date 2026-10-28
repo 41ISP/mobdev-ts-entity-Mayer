@@ -4,13 +4,14 @@ import type { IGame } from "../types";
 interface IGameCard extends IGame {
 
 }
-export function GameCard({ title, cover, rating, description, price, genre, releaseDate }: IGameCard) {
+export function GameCard({ title, cover, rating, description, price, genre, releaseDate, platforms }: IGameCard) {
     return (
         <article className="card">
             <div className="card__cover">
                 {/* Проверить наличие ключа и вывести */}
                 {cover && (
-                    <img src={API_URL + cover.url} alt={cover.alternativeText} />
+                    <img src={API_URL + cover.url} alt={cover.alternativeText} 
+                    />
                 )}
                 <span>{title}</span>
                 {rating && (
@@ -21,7 +22,8 @@ export function GameCard({ title, cover, rating, description, price, genre, rele
 
             <div className="card__body">
                 <h3>{title}</h3>
-                {genre && releaseDate && <p className="card__meta">{genre}, {releaseDate}</p>}
+                {genre &&  <p className="card__meta">{GENRE_LABELS[genre]}</p>}
+                {releaseDate && <p className="card__meta">{new Date(releaseDate).getFullYear()}</p>}
                 {description && (
                     <p className="card__desc">{description[0].children[0].text}</p>
                 )}
